@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-service
+  labels:
+    app: python
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-service
+  template:
+    metadata:
+      labels:
+        app: python-service
+    spec:
+      volumes:
+        - name: task-pv-volume
+          persistentVolumeClaim:
+            claimName: task-pv-claim
+      containers:
+      - name: python-service
+        image: kube-platform-python-service:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+          - mountPath: /data
+            name: task-pv-volume
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: python-service-nodeport
+spec:
+ ports:
+ - port: 8000
+   protocol: TCP
+   targetPort: 8000
+ selector:
+   app: python-service
+ type: NodePort

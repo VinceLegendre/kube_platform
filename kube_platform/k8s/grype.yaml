@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: grype-test
+  namespace: default
+spec:
+  containers:
+    - image: anchore/grype:latest
+      name: grype
+#      env:
+#        - name: DOCKER_CONFIG
+#          value: /config
+#      volumeMounts:
+#      - mountPath: /config
+#        name: registry-config
+#        readOnly: true
+      args:
+        - <test-image>
+  volumes:
+  - name: registry-config
+    secret:
+      secretName: registry-config

@@ -55,6 +55,12 @@ simple and performant REST API, we can achieve the desired functionalities by:
  - building an API with FastAPI, exposing it within our Kubernetes cluster
  - within our API : instantiate a Kubernetes API Python object and manage all jobs from here
 
+### Building docker images: Kaniko
+From the official documentation: *"[Kaniko](https://github.com/GoogleContainerTools/kaniko) a tool to build
+container images from a Dockerfile, inside a container or Kubernetes cluster."*
+
+Kaniko fits our technical requirements for building docker images and is easy to deploy in a Kubernetes cluster.
+
 ### Scanning docker images for vulnerabilities : Grype
 Scanning docker images before execution becomes a required security measure. Here are a few famous
 [options](https://geekflare.com/container-security-scanners/):

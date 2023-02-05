@@ -34,10 +34,7 @@ async def root():
 async def create_upload_file(file: UploadFile, background_tasks: BackgroundTasks):
     """
     Uploads a Dockerfile to the platform and creates a job from it.
-    A job if composed of several sequential steps:
-    1. Validation of the dockerfile, using hadolint
-    2. Docker image building
-    3. Creation of a pod dedicated to run the docker image, which must contain an entrypoint
+    A job if composed of several sequential steps, from image building to container execution.
     :param file:
     :param background_tasks:
     :return:

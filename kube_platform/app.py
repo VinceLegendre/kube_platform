@@ -30,8 +30,8 @@ async def root():
     return {"msg": "Container execution service up for work."}
 
 
-@app.post("/upload_file/", status_code=202)
-async def create_upload_file(file: UploadFile, background_tasks: BackgroundTasks):
+@app.post("/job/", status_code=202)
+async def create_job(file: UploadFile, background_tasks: BackgroundTasks):
     """
     Uploads a Dockerfile to the platform and creates a job from it.
     A job if composed of several sequential steps, from image building to container execution.
@@ -59,7 +59,7 @@ async def create_upload_file(file: UploadFile, background_tasks: BackgroundTasks
         return {"filename": file.filename, "job_id": job_id}
 
 
-@app.get("/status/")
+@app.get("/job/")
 async def get_job_status(job_id: Optional[str] = None):
     """
     Returns the execution status of Dockerfiles processing jobs
